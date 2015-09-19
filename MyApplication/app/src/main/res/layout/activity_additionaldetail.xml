@@ -5,13 +5,13 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity"
     android:background="#9c9c9c"
-    android:id="@+id/mainlayout">
+    android:id="@+id/additionaldetails">
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="10dp"
         android:layout_centerHorizontal="true"
         android:background="#ffffff"
         android:id="@+id/linearLayout">
@@ -19,7 +19,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/Name"
+            android:text="@string/field1"
             android:id="@+id/textView"
             android:height="@dimen/abc_action_bar_content_inset_material"
             android:layout_gravity="center_horizontal"
@@ -32,7 +32,7 @@
         android:orientation="vertical"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="170dp"
+        android:layout_marginTop="100dp"
         android:layout_centerHorizontal="true"
         android:background="#ffffff"
         android:id="@+id/linearLayout1">
@@ -40,7 +40,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/phone_no"
+            android:text="@string/field2"
             android:id="@+id/textView1"
             android:height="@dimen/abc_action_bar_content_inset_material"
             android:layout_gravity="center_horizontal"
@@ -53,7 +53,7 @@
         android:orientation="vertical"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="300dp"
+        android:layout_marginTop="190dp"
         android:layout_centerHorizontal="true"
         android:background="#ffffff"
         android:id="@+id/linearLayout2">
@@ -61,7 +61,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/email"
+            android:text="@string/field3"
             android:id="@+id/textView2"
             android:height="@dimen/abc_action_bar_content_inset_material"
             android:layout_gravity="center_horizontal"
@@ -75,7 +75,7 @@
         android:orientation="vertical"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="40dp"
         android:layout_centerHorizontal="true"
         android:background="#ffffff"
         android:id="@+id/linearLayout3">
@@ -95,7 +95,7 @@
         android:orientation="vertical"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="130dp"
         android:layout_centerHorizontal="true"
         android:background="#ffffff"
         android:id="@+id/linearLayout4">
@@ -116,7 +116,7 @@
         android:orientation="vertical"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="330dp"
+        android:layout_marginTop="220dp"
         android:layout_centerHorizontal="true"
         android:background="#ffffff"
         android:id="@+id/linearLayout5">
@@ -132,6 +132,46 @@
             android:foregroundGravity="bottom"/>
     </LinearLayout>
 
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="280dp"
+        android:layout_centerHorizontal="true"
+        android:background="#ffffff"
+        android:id="@+id/linearLayout6">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/field4"
+            android:id="@+id/textView3"
+            android:height="@dimen/abc_action_bar_content_inset_material"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="5dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="310dp"
+        android:layout_centerHorizontal="true"
+        android:background="#ffffff"
+        android:id="@+id/linearLayout7">
+
+        <EditText
+            android:layout_width="201dp"
+            android:layout_height="35dp"
+            android:id="@+id/editText3"
+            android:inputType="textEmailAddress"
+            android:textStyle="normal"
+            android:typeface="normal"
+            android:textSize="14sp"
+            android:foregroundGravity="bottom"/>
+    </LinearLayout>
     <Button
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
@@ -143,8 +183,7 @@
         android:layout_marginBottom="35dp"
         android:background="#a3c6ff"
         android:paddingLeft="25dp"
-        android:paddingRight="25dp"
-        android:clickable="true"/>
+        android:paddingRight="25dp" />
 
 
 </RelativeLayout>
