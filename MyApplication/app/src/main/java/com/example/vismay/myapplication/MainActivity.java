@@ -1,27 +1,87 @@
 package com.example.vismay.myapplication;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
+import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 
 
 public class MainActivity extends AppCompatActivity {
 
+    private final String fileName = "myfile.txt";
+    OutputStream os;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         final Button button = (Button) findViewById(R.id.button);
-        button.setOnClickListener(new View.OnClickListener() {
+        final EditText o_name = (EditText) findViewById(R.id.editText);
+        final EditText o_phno = (EditText) findViewById(R.id.editText1);
+        final EditText o_mailid = (EditText) findViewById(R.id.editText2);
+
+
+       button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String s_name="name",s_phno="9999123456",s_mailid="mail@mail.com";
                 Intent SecondIntent = new Intent(MainActivity.this, AdditionalDetail.class);
                 startActivity(SecondIntent);
+                s_name = o_name.getText().toString();
+                s_phno = o_phno.getText().toString();
+                s_mailid = o_mailid.getText().toString();
+                if(Debugclass.Logdisplay==1)
+                {
+                    Log.v("EditText",s_name);
+                    Log.v("EditText",s_phno);
+                    Log.v("EditText", s_mailid);
+                }
+
+                if (Environment.MEDIA_MOUNTED.equals(Environment
+                        .getExternalStorageState())) {
+
+                    File outFile = new File(
+                            getExternalFilesDir(Environment.DIRECTORY_PICTURES),
+                            fileName);
+                    try {
+
+                        BufferedOutputStream os = new BufferedOutputStream(
+                                new FileOutputStream(outFile));
+                        try {
+                            os.write(s_name.getBytes());
+                            os.write(s_phno.getBytes());
+                            os.write(s_mailid.getBytes());
+                        } catch(IOException e){
+                            Log.v("EditText", "write,error");
+                        }
+                        try {
+                            os.close();
+                        } catch (IOException e) {
+                            Log.v("vismay", "IOException");
+                        }
+
+                    } catch (FileNotFoundException e) {
+                        Log.v("EditText", "FileNotFoundException");
+                    }
+
+                }
 
             }
         });
