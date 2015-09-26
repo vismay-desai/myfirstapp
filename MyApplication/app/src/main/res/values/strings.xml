@@ -14,5 +14,9 @@
     <string name="field4">Field 4 : </string>
     <string name="title_activity_additionaldetail">AdditionalDetails</string>
 
+    <string name="takepic">Take Photo to Save</string>
+    <string name="takelocation">Take Location Details and Save</string>
+
     <string name="hello_world">Hello world!</string>
+    <string name="title_activity_other_details">otherDetails</string>
 </resources>

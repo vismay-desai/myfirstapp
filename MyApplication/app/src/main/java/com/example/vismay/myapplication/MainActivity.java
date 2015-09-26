@@ -49,41 +49,45 @@ public class MainActivity extends AppCompatActivity {
                 s_mailid = o_mailid.getText().toString();
                 if(Debugclass.Logdisplay==1)
                 {
-                    Log.v("EditText",s_name);
-                    Log.v("EditText",s_phno);
-                    Log.v("EditText", s_mailid);
+                    Log.w("EditText",s_name);
+                    Log.w("EditText",s_phno);
+                    Log.w("EditText", s_mailid);
                 }
 
-                if (Environment.MEDIA_MOUNTED.equals(Environment
-                        .getExternalStorageState())) {
+                if(Debugclass.finalversion==1) {
 
-                    File outFile = new File(
-                            getExternalFilesDir(Environment.DIRECTORY_PICTURES),
-                            fileName);
-                    try {
+                    if (Environment.MEDIA_MOUNTED.equals(Environment
+                            .getExternalStorageState())) {
 
-                        BufferedOutputStream os = new BufferedOutputStream(
-                                new FileOutputStream(outFile));
+                        File outFile = new File(
+                                getExternalFilesDir(Environment.DIRECTORY_PICTURES),
+                                fileName);
                         try {
-                            os.write(s_name.getBytes());
-                            os.write(s_phno.getBytes());
-                            os.write(s_mailid.getBytes());
-                        } catch(IOException e){
-                            Log.v("EditText", "write,error");
-                        }
-                        try {
-                            os.close();
-                        } catch (IOException e) {
-                            Log.v("vismay", "IOException");
+
+                            BufferedOutputStream os = new BufferedOutputStream(
+                                    new FileOutputStream(outFile));
+                            try {
+                                os.write(s_name.getBytes());
+                                os.write(s_phno.getBytes());
+                                os.write(s_mailid.getBytes());
+                            } catch (IOException e) {
+                                Log.w("EditText", "write,error");
+                            }
+                            try {
+                                os.close();
+                            } catch (IOException e) {
+                                Log.w("vismay", "IOException");
+                            }
+
+                        } catch (FileNotFoundException e) {
+                            Log.w("EditText", "FileNotFoundException");
                         }
 
-                    } catch (FileNotFoundException e) {
-                        Log.v("EditText", "FileNotFoundException");
                     }
-
                 }
 
             }
+
         });
 
     }

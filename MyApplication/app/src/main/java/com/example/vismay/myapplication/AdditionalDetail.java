@@ -1,8 +1,10 @@
 package com.example.vismay.myapplication;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -37,52 +39,57 @@ public class AdditionalDetail extends AppCompatActivity {
         final EditText o_field3 = (EditText) findViewById(R.id.editText5);
         final EditText o_field4 = (EditText) findViewById(R.id.editText6);
 
+
+
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String s_field1 = "field1", s_field2 = "field2", s_field3 = "field3",s_field4="field4";
-           //     Intent SecondIntent = new Intent(AdditionalDetail.this, AdditionalDetail.class);
-           //     startActivity(SecondIntent);
+                Intent SecondIntent = new Intent(AdditionalDetail.this, otherDetails.class);
+                startActivity(SecondIntent);
                 s_field1 = o_field1.getText().toString();
                 s_field2 = o_field2.getText().toString();
                 s_field3 = o_field3.getText().toString();
                 s_field4 = o_field4.getText().toString();
                 if(Debugclass.Logdisplay==1)
                 {
-                    Log.v("EditText",s_field1);
-                    Log.v("EditText",s_field2);
-                    Log.v("EditText", s_field3);
-                    Log.v("EditText",s_field4);
+                    Log.w("EditText",s_field1);
+                    Log.w("EditText",s_field2);
+                    Log.w("EditText", s_field3);
+                    Log.w("EditText",s_field4);
                 }
-                if (Environment.MEDIA_MOUNTED.equals(Environment
-                        .getExternalStorageState())) {
 
-                    File outFile = new File(
-                            getExternalFilesDir(Environment.DIRECTORY_PICTURES),
-                            fileName);
-                    try {
+                if(Debugclass.finalversion==1) {
+                    if (Environment.MEDIA_MOUNTED.equals(Environment
+                            .getExternalStorageState())) {
 
-                        BufferedOutputStream os = new BufferedOutputStream(
-                               new FileOutputStream(outFile,true));
-
+                        File outFile = new File(
+                                getExternalFilesDir(Environment.DIRECTORY_PICTURES),
+                                fileName);
                         try {
-                            os.write(s_field1.getBytes());
-                            os.write(s_field2.getBytes());
-                            os.write(s_field3.getBytes());
-                            os.write(s_field4.getBytes());
-                        } catch(IOException e){
-                            Log.v("EditText", "write,error");
-                        }
-                        try {
-                            os.close();
-                        } catch (IOException e) {
-                            Log.v("vismay", "IOException");
+
+                            BufferedOutputStream os = new BufferedOutputStream(
+                                    new FileOutputStream(outFile, true));
+
+                            try {
+                                os.write(s_field1.getBytes());
+                                os.write(s_field2.getBytes());
+                                os.write(s_field3.getBytes());
+                                os.write(s_field4.getBytes());
+                            } catch (IOException e) {
+                                Log.w("EditText", "write,error");
+                            }
+                            try {
+                                os.close();
+                            } catch (IOException e) {
+                                Log.w("vismay", "IOException");
+                            }
+
+                        } catch (FileNotFoundException e) {
+                            Log.w("EditText", "FileNotFoundException");
                         }
 
-                    } catch (FileNotFoundException e) {
-                        Log.v("EditText", "FileNotFoundException");
                     }
-
                 }
             }
         });
