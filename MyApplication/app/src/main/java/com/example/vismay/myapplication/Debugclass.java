@@ -7,7 +7,5 @@ package com.example.vismay.myapplication;
  *
  */
 public class Debugclass {
-    public static int Logdisplay =1;
-    public static int finalversion = 1;
-
+    public static int Logdisplay =0;
 }

@@ -4,7 +4,9 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -18,22 +20,57 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import java.io.BufferedOutputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
-public class otherDetails extends AppCompatActivity {
+public class otherDetails extends AppCompatActivity implements LocationListener {
 
     private static int REQUEST_CAMERA =100;
+    private final String fileName = "myfile.txt";
     String mCurrentPhotoPath;
     Button picbutton;
     Button geobutton;
     Button nxtbutton;
     Intent camintent;
+    LocationManager locationManager;
+    String longitude="0",latitude="0";
+
+    public void onLocationChanged(Location mylocation) {
+        if (Debugclass.Logdisplay==1) {
+            Log.w("Latitude:", String.valueOf(mylocation.getLatitude()));
+            Log.w("Longitude:", String.valueOf(mylocation.getLongitude()));
+        }
+        longitude = String.valueOf(mylocation.getLongitude());
+        latitude = String.valueOf(mylocation.getLatitude());
+    }
+
+    public void onProviderDisabled(String provider) {
+        if (Debugclass.Logdisplay==1) {
+            Log.d("Latitude", "disable");
+        }
+        Context context = getApplicationContext();
+        CharSequence text = "Please enable GPS to get location";
+        int duration = Toast.LENGTH_SHORT;
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.show();
+    }
+
+    public void onProviderEnabled(String provider) {
+        if (Debugclass.Logdisplay==1) {
+            Log.d("Latitude", "enable");
+        }
+        Context context = getApplicationContext();
+        CharSequence text = "Thank you for providing GPS access";
+        int duration = Toast.LENGTH_SHORT;
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.show();
+    }
+
+    public void onStatusChanged(String provider, int status, Bundle extras) {
+        Log.d("Latitude","status");
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +80,9 @@ public class otherDetails extends AppCompatActivity {
         picbutton = (Button) findViewById(R.id.button2);
         geobutton = (Button) findViewById(R.id.button3);
         nxtbutton = (Button) findViewById(R.id.button4);
+        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,0,0,this);
 
 
 
@@ -63,23 +103,20 @@ public class otherDetails extends AppCompatActivity {
                 if (photoFile != null) {
                     camintent.putExtra(MediaStore.EXTRA_OUTPUT,
                             Uri.fromFile(photoFile));
-                    if(Debugclass.Logdisplay==1) {
+                    if (Debugclass.Logdisplay == 1) {
                         Log.w("intent_event:", "pic take event called");
                     }
                     int currentapiVersion = android.os.Build.VERSION.SDK_INT;
-                    if (currentapiVersion >= android.os.Build.VERSION_CODES.M){
+                    if (currentapiVersion >= android.os.Build.VERSION_CODES.M) {
                         if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
                             requestPermissions(new String[]{Manifest.permission.CAMERA}, 10);
-                        }
-                        else
-                        {
+                        } else {
                             startActivityForResult(camintent, REQUEST_CAMERA);
                         }
 
-                    } else{
+                    } else {
                         startActivityForResult(camintent, REQUEST_CAMERA);
                     }
-
 
 
                 }
@@ -91,14 +128,63 @@ public class otherDetails extends AppCompatActivity {
         geobutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                picbutton.setVisibility(View.VISIBLE);
-                geobutton.setVisibility(View.GONE);
-                if(Debugclass.Logdisplay==1) {
-                    Log.w("onclickevent", "geo button event called");
+            if(Debugclass.Logdisplay==1) {
+                Log.w("onclickevent", "geo button event called");
+                Log.w("Latitude:", latitude);
+                Log.w("Longitude:", longitude);
+            }
+            picbutton.setVisibility(View.GONE);
+            geobutton.setVisibility(View.GONE);
+            nxtbutton.setVisibility(View.VISIBLE);
+
+            if (Environment.MEDIA_MOUNTED.equals(Environment
+                    .getExternalStorageState())) {
+
+                File outFile = new File(
+                        getExternalFilesDir(Environment.DIRECTORY_PICTURES),
+                        fileName);
+                try {
+                    BufferedOutputStream os = new BufferedOutputStream(
+                            new FileOutputStream(outFile, true));
+
+                    try {
+                         os.write("Lat/long : ".getBytes());
+                         os.write(latitude.getBytes());
+                         os.write(longitude.getBytes());
+
+                    } catch (IOException e) {
+                         Log.w("EditText", "write,error");
+                    }
+                    try {
+                         os.close();
+                    } catch (IOException e) {
+                         Log.w("vismay", "IOException");
+                }
+
+                } catch (FileNotFoundException e) {
+                     Log.w("EditText", "FileNotFoundException");
                 }
 
             }
+
+            }
         });
+
+        nxtbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(Debugclass.Logdisplay==1) {
+                    Log.w("onclickevent", "finsh event called");
+                }
+
+
+
+            }
+        });
+
+
+
+
     }
 
     private File createImageFile() throws IOException {
@@ -128,9 +214,17 @@ public class otherDetails extends AppCompatActivity {
                 }
 
             } else if (resultCode == RESULT_CANCELED) {
-                // User cancelled the image capture
+                Context context = getApplicationContext();
+                CharSequence text = "Please take one photo";
+                int duration = Toast.LENGTH_SHORT;
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
             } else {
-                // Image capture failed, advise user
+                Context context = getApplicationContext();
+                CharSequence text = "Some error occure, please try again";
+                int duration = Toast.LENGTH_SHORT;
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
             }
         }
     }
@@ -149,6 +243,8 @@ public class otherDetails extends AppCompatActivity {
             }
         }
     }
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

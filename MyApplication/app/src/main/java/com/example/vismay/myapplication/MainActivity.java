@@ -1,8 +1,7 @@
 package com.example.vismay.myapplication;
 
-import android.content.Context;
+
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,21 +11,17 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
-
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
+
 
 
 public class MainActivity extends AppCompatActivity {
 
     private final String fileName = "myfile.txt";
-    OutputStream os;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
        button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String s_name="name",s_phno="9999123456",s_mailid="mail@mail.com";
+                String s_name,s_phno,s_mailid;
                 Intent SecondIntent = new Intent(MainActivity.this, AdditionalDetail.class);
                 startActivity(SecondIntent);
                 s_name = o_name.getText().toString();
@@ -54,37 +49,35 @@ public class MainActivity extends AppCompatActivity {
                     Log.w("EditText", s_mailid);
                 }
 
-                if(Debugclass.finalversion==1) {
+                if (Environment.MEDIA_MOUNTED.equals(Environment
+                        .getExternalStorageState())) {
 
-                    if (Environment.MEDIA_MOUNTED.equals(Environment
-                            .getExternalStorageState())) {
+                    File outFile = new File(
+                            getExternalFilesDir(Environment.DIRECTORY_PICTURES),
+                            fileName);
+                    try {
 
-                        File outFile = new File(
-                                getExternalFilesDir(Environment.DIRECTORY_PICTURES),
-                                fileName);
+                        BufferedOutputStream os = new BufferedOutputStream(
+                                new FileOutputStream(outFile));
                         try {
-
-                            BufferedOutputStream os = new BufferedOutputStream(
-                                    new FileOutputStream(outFile));
-                            try {
-                                os.write(s_name.getBytes());
-                                os.write(s_phno.getBytes());
-                                os.write(s_mailid.getBytes());
-                            } catch (IOException e) {
-                                Log.w("EditText", "write,error");
-                            }
-                            try {
-                                os.close();
-                            } catch (IOException e) {
-                                Log.w("vismay", "IOException");
-                            }
-
-                        } catch (FileNotFoundException e) {
-                            Log.w("EditText", "FileNotFoundException");
+                             os.write(s_name.getBytes());
+                             os.write(s_phno.getBytes());
+                             os.write(s_mailid.getBytes());
+                        } catch (IOException e) {
+                             Log.w("EditText", "write,error");
+                        }
+                        try {
+                             os.close();
+                        } catch (IOException e) {
+                             Log.w("vismay", "IOException");
                         }
 
+                    } catch (FileNotFoundException e) {
+                         Log.w("EditText", "FileNotFoundException");
                     }
+
                 }
+
 
             }
 
