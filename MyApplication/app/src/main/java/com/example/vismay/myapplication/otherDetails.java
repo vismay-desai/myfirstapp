@@ -176,8 +176,10 @@ public class otherDetails extends AppCompatActivity implements LocationListener 
                 if(Debugclass.Logdisplay==1) {
                     Log.w("onclickevent", "finsh event called");
                 }
-
-
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.putExtra("EXIT", true);
+                startActivity(intent);
 
             }
         });

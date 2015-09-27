@@ -24,6 +24,9 @@ public class MainActivity extends AppCompatActivity {
     private final String fileName = "myfile.txt";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        if (getIntent().getBooleanExtra("EXIT", false)) {
+            finish();
+        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
