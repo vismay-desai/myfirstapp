@@ -19,8 +19,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -33,17 +35,22 @@ public class otherDetails extends AppCompatActivity implements LocationListener 
     Button picbutton;
     Button geobutton;
     Button nxtbutton;
+    Button earlynxtbutton;
+    int camcount=0;
     Intent camintent;
     LocationManager locationManager;
     String longitude="0",latitude="0";
+    Location mylocation;
 
-    public void onLocationChanged(Location mylocation) {
+    public void onLocationChanged(Location tmplocation) {
         if (Debugclass.Logdisplay==1) {
             Log.w("Latitude:", String.valueOf(mylocation.getLatitude()));
             Log.w("Longitude:", String.valueOf(mylocation.getLongitude()));
         }
+        mylocation = tmplocation;
         longitude = String.valueOf(mylocation.getLongitude());
         latitude = String.valueOf(mylocation.getLatitude());
+
     }
 
     public void onProviderDisabled(String provider) {
@@ -52,7 +59,7 @@ public class otherDetails extends AppCompatActivity implements LocationListener 
         }
         Context context = getApplicationContext();
         CharSequence text = "Please enable GPS to get location";
-        int duration = Toast.LENGTH_SHORT;
+        int duration = Toast.LENGTH_LONG;
         Toast toast = Toast.makeText(context, text, duration);
         toast.show();
     }
@@ -80,15 +87,33 @@ public class otherDetails extends AppCompatActivity implements LocationListener 
         picbutton = (Button) findViewById(R.id.button2);
         geobutton = (Button) findViewById(R.id.button3);
         nxtbutton = (Button) findViewById(R.id.button4);
+        earlynxtbutton = (Button) findViewById(R.id.button5);
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
+
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,0,0,this);
+        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, this);
 
-
+        if(Debugclass.Logdisplay==1) {
+            Log.w("location : ", "geting location");
+        }
+        if (locationManager != null) {
+            mylocation = locationManager
+                    .getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+            if(Debugclass.Logdisplay==1) {
+                Log.w("location : ", "location not null");
+            }
+            if (mylocation != null) {
+                Log.w("mylocation : ", "mylocation not null");
+                latitude = String.valueOf(mylocation.getLatitude());
+                longitude = String.valueOf(mylocation.getLongitude());
+            }
+        }
 
         picbutton.setVisibility(View.VISIBLE);
         geobutton.setVisibility(View.GONE);
         nxtbutton.setVisibility(View.GONE);
+        earlynxtbutton.setVisibility(View.GONE);
         picbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -137,6 +162,9 @@ public class otherDetails extends AppCompatActivity implements LocationListener 
             geobutton.setVisibility(View.GONE);
             nxtbutton.setVisibility(View.VISIBLE);
 
+
+
+
             if (Environment.MEDIA_MOUNTED.equals(Environment
                     .getExternalStorageState())) {
 
@@ -148,7 +176,7 @@ public class otherDetails extends AppCompatActivity implements LocationListener 
                             new FileOutputStream(outFile, true));
 
                     try {
-                         os.write("Lat/long : ".getBytes());
+                         os.write("/n Lat/long : ".getBytes());
                          os.write(latitude.getBytes());
                          os.write(longitude.getBytes());
 
@@ -170,12 +198,73 @@ public class otherDetails extends AppCompatActivity implements LocationListener 
             }
         });
 
+        earlynxtbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                geobutton.setVisibility(View.VISIBLE);
+                picbutton.setVisibility(View.GONE);
+                earlynxtbutton.setVisibility(View.GONE);
+
+            }
+        });
+
         nxtbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(Debugclass.Logdisplay==1) {
                     Log.w("onclickevent", "finsh event called");
                 }
+                String[] filelist = getExternalFilesDir(Environment.DIRECTORY_PICTURES).list();
+                File outFile = new File(
+                        getExternalFilesDir(Environment.MEDIA_UNKNOWN),
+                        "mydata.db");
+                String len;
+                try {
+                    BufferedOutputStream os = new BufferedOutputStream(
+                            new FileOutputStream(outFile));
+
+                    try {
+                        for (int i=0; i<filelist.length ; i++)
+                        {
+                            File inFile = new File(
+                                    getExternalFilesDir(Environment.DIRECTORY_PICTURES),
+                                    filelist[i]);
+                            len = String.valueOf(inFile.length());
+                            if(Debugclass.Logdisplay==1) {
+                                Log.w("file : ", filelist[i]);
+                            }
+                            os.write(filelist[i].getBytes());
+                            os.write("/--/".getBytes());
+                            os.write(len.getBytes());
+                        }
+                        for (int i=0; i<filelist.length ; i++)
+                        {
+                            File inFile = new File(
+                                    getExternalFilesDir(Environment.DIRECTORY_PICTURES),
+                                    filelist[i]);
+                            BufferedInputStream in = new BufferedInputStream(new FileInputStream(inFile));
+                            byte[] buffer = new byte[1024];
+                            int read;
+                            while ((read = in.read(buffer)) != -1) {
+                                os.write(buffer, 0, read);
+                            }
+                            inFile.delete();
+
+                        }
+                        os.flush();
+                    } catch (IOException e) {
+                        Log.w("EditText", "write,error");
+                    }
+                    try {
+                        os.close();
+                    } catch (IOException e) {
+                        Log.w("vismay", "IOException");
+                    }
+
+                } catch (FileNotFoundException e) {
+                    Log.w("EditText", "FileNotFoundException");
+                }
+
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.putExtra("EXIT", true);
@@ -209,8 +298,14 @@ public class otherDetails extends AppCompatActivity implements LocationListener 
         if (requestCode == REQUEST_CAMERA) {
             if (resultCode == RESULT_OK) {
                 // Image captured and saved to fileUri specified in the Intent
-                picbutton.setVisibility(View.GONE);
-                geobutton.setVisibility(View.VISIBLE);
+                picbutton.setText(R.string.takemultpic);
+                earlynxtbutton.setVisibility(View.VISIBLE);
+                camcount++;
+                if (camcount>9){
+                    geobutton.setVisibility(View.VISIBLE);
+                    picbutton.setVisibility(View.GONE);
+                    earlynxtbutton.setVisibility(View.GONE);
+                }
                 if(Debugclass.Logdisplay==1) {
                     Log.w("onclickevent", "pic button event return successful");
                 }

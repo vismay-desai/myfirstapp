@@ -45,4 +45,17 @@
         android:paddingRight="25dp"
         android:clickable="true"/>
 
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/next"
+        android:id="@+id/button5"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="35dp"
+        android:background="#a3c6ff"
+        android:paddingLeft="25dp"
+        android:paddingRight="25dp" />
+
 </RelativeLayout>

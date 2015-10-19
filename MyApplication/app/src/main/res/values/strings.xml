@@ -15,6 +15,7 @@
     <string name="title_activity_additionaldetail">AdditionalDetails</string>
 
     <string name="takepic">Take Photo to Save</string>
+    <string name="takemultpic">Take another Photo and save</string>
     <string name="takelocation">Take Location Details and Save</string>
     <string name="done">FINISH AND SAVE</string>
     <string name="hello_world">Hello world!</string>
