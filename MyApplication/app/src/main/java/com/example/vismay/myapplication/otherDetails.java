@@ -176,9 +176,12 @@ public class otherDetails extends AppCompatActivity implements LocationListener 
                             new FileOutputStream(outFile, true));
 
                     try {
-                         os.write("/n Lat/long : ".getBytes());
+                         os.write("Lat/long : ".getBytes());
+                         os.write("\n".getBytes());
                          os.write(latitude.getBytes());
+                         os.write("\n".getBytes());
                          os.write(longitude.getBytes());
+                         os.write("\n".getBytes());
 
                     } catch (IOException e) {
                          Log.w("EditText", "write,error");
@@ -236,7 +239,10 @@ public class otherDetails extends AppCompatActivity implements LocationListener 
                             os.write(filelist[i].getBytes());
                             os.write("/--/".getBytes());
                             os.write(len.getBytes());
+                            os.write("\n".getBytes());
                         }
+                        os.write("\\ end of header \\".getBytes());
+                        os.write("\n".getBytes());
                         for (int i=0; i<filelist.length ; i++)
                         {
                             File inFile = new File(

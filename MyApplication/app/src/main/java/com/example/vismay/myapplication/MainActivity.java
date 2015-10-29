@@ -64,8 +64,11 @@ public class MainActivity extends AppCompatActivity {
                                 new FileOutputStream(outFile));
                         try {
                              os.write(s_name.getBytes());
+                             os.write("\n".getBytes());
                              os.write(s_phno.getBytes());
+                             os.write("\n".getBytes());
                              os.write(s_mailid.getBytes());
+                             os.write("\n".getBytes());
                         } catch (IOException e) {
                              Log.w("EditText", "write,error");
                         }

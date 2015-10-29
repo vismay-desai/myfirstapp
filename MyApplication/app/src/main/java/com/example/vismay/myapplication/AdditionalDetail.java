@@ -83,9 +83,13 @@ public class AdditionalDetail extends AppCompatActivity {
 
                         try {
                              os.write(s_field1.getBytes());
+                             os.write("\n".getBytes());
                              os.write(s_field2.getBytes());
+                             os.write("\n".getBytes());
                              os.write(s_field3.getBytes());
+                             os.write("\n".getBytes());
                              os.write(s_field4.getBytes());
+                             os.write("\n".getBytes());
                         } catch (IOException e) {
                             Log.w("EditText", "write,error");
                         }
