@@ -41,9 +41,9 @@
                     android:id="@+id/textView3"
                     android:height="@dimen/abc_action_bar_content_inset_material"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginBottom="5dp" />
+                    android:layout_marginLeft="20sp"
+                    android:layout_marginRight="20sp"
+                    android:layout_marginBottom="5sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -62,7 +62,7 @@
 
                 <EditText
                     android:layout_width="250sp"
-                    android:layout_height="35dp"
+                    android:layout_height="35sp"
                     android:id="@+id/editText3"
                     android:inputType="text"
                     android:textStyle="normal"
@@ -96,9 +96,9 @@
                     android:id="@+id/textView4"
                     android:height="@dimen/abc_action_bar_content_inset_material"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginBottom="5dp" />
+                    android:layout_marginLeft="20sp"
+                    android:layout_marginRight="20sp"
+                    android:layout_marginBottom="5sp" />
 
             </LinearLayout>
 
@@ -118,7 +118,7 @@
 
                 <EditText
                     android:layout_width="250sp"
-                    android:layout_height="35dp"
+                    android:layout_height="35sp"
                     android:id="@+id/editText4"
                     android:inputType="phone"
                     android:textStyle="normal"
@@ -153,9 +153,9 @@
                     android:id="@+id/textView5"
                     android:height="@dimen/abc_action_bar_content_inset_material"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginBottom="5dp" />
+                    android:layout_marginLeft="20sp"
+                    android:layout_marginRight="20sp"
+                    android:layout_marginBottom="5sp" />
             </LinearLayout>
 
 
@@ -176,7 +176,7 @@
 
                 <EditText
                     android:layout_width="250sp"
-                    android:layout_height="35dp"
+                    android:layout_height="35sp"
                     android:id="@+id/editText5"
                     android:inputType="textEmailAddress"
                     android:textStyle="normal"
@@ -211,9 +211,9 @@
                     android:id="@+id/textView6"
                     android:height="@dimen/abc_action_bar_content_inset_material"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginBottom="5dp" />
+                    android:layout_marginLeft="20sp"
+                    android:layout_marginRight="20sp"
+                    android:layout_marginBottom="5sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -233,7 +233,7 @@
 
                 <EditText
                     android:layout_width="250sp"
-                    android:layout_height="35dp"
+                    android:layout_height="35sp"
                     android:id="@+id/editText6"
                     android:inputType="textEmailAddress"
                     android:textStyle="normal"
@@ -258,8 +258,8 @@
             android:text="@string/next"
             android:id="@+id/button1"
             android:background="#a3c6ff"
-            android:paddingLeft="25dp"
-            android:paddingRight="25dp"
+            android:paddingLeft="25sp"
+            android:paddingRight="25sp"
             android:layout_gravity="center_vertical" />
     </LinearLayout>
 

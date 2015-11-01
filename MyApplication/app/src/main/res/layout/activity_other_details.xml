@@ -17,8 +17,8 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:background="#a3c6ff"
-        android:paddingLeft="25dp"
-        android:paddingRight="25dp" />
+        android:paddingLeft="25sp"
+        android:paddingRight="25sp" />
     <Button
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
@@ -28,8 +28,8 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:background="#a3c6ff"
-        android:paddingLeft="25dp"
-        android:paddingRight="25dp" />
+        android:paddingLeft="25sp"
+        android:paddingRight="25sp" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
@@ -41,8 +41,8 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="35dp"
         android:background="#a3c6ff"
-        android:paddingLeft="25dp"
-        android:paddingRight="25dp"
+        android:paddingLeft="25sp"
+        android:paddingRight="25sp"
         android:clickable="true"/>
 
     <Button
@@ -53,9 +53,9 @@
         android:id="@+id/button5"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="35dp"
+        android:layout_marginBottom="35sp"
         android:background="#a3c6ff"
-        android:paddingLeft="25dp"
-        android:paddingRight="25dp" />
+        android:paddingLeft="25sp"
+        android:paddingRight="25sp" />
 
 </RelativeLayout>

@@ -63,7 +63,7 @@
 
                 <EditText
                     android:layout_width="match_parent"
-                    android:layout_height="35dp"
+                    android:layout_height="35sp"
                     android:id="@+id/editText"
                     android:inputType="text"
                     android:textStyle="normal"
@@ -120,8 +120,8 @@
                 android:layout_gravity="center_horizontal">
 
                 <EditText
-                    android:layout_width="201dp"
-                    android:layout_height="35dp"
+                    android:layout_width="201sp"
+                    android:layout_height="35sp"
                     android:id="@+id/editText1"
                     android:inputType="phone"
                     android:textStyle="normal"
@@ -179,7 +179,7 @@
 
                 <EditText
                     android:layout_width="match_parent"
-                    android:layout_height="35dp"
+                    android:layout_height="35sp"
                     android:id="@+id/editText2"
                     android:inputType="textEmailAddress"
                     android:textStyle="normal"
@@ -204,8 +204,8 @@
             android:text="@string/next"
             android:id="@+id/button"
             android:background="#a3c6ff"
-            android:paddingLeft="25dp"
-            android:paddingRight="25dp"
+            android:paddingLeft="25sp"
+            android:paddingRight="25sp"
             android:clickable="true"
             android:layout_gravity="center_vertical" />
 

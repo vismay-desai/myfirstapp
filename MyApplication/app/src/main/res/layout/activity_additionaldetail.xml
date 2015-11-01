@@ -32,9 +32,9 @@
                 android:id="@+id/textView3"
                 android:height="@dimen/abc_action_bar_content_inset_material"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginBottom="5dp" />
+                android:layout_marginLeft="20sp"
+                android:layout_marginRight="20sp"
+                android:layout_marginBottom="5sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -53,8 +53,8 @@
             android:id="@+id/linearLayout9">
 
             <EditText
-                android:layout_width="201dp"
-                android:layout_height="35dp"
+                android:layout_width="201sp"
+                android:layout_height="35sp"
                 android:id="@+id/editText3"
                 android:inputType="text"
                 android:textStyle="normal"
@@ -87,9 +87,9 @@
                 android:id="@+id/textView4"
                 android:height="@dimen/abc_action_bar_content_inset_material"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginBottom="5dp" />
+                android:layout_marginLeft="20sp"
+                android:layout_marginRight="20sp"
+                android:layout_marginBottom="5sp" />
 
         </LinearLayout>
 
@@ -109,8 +109,8 @@
             android:id="@+id/linearLayout10">
 
             <EditText
-                android:layout_width="201dp"
-                android:layout_height="35dp"
+                android:layout_width="201sp"
+                android:layout_height="35sp"
                 android:id="@+id/editText4"
                 android:inputType="phone"
                 android:textStyle="normal"
@@ -144,9 +144,9 @@
                 android:id="@+id/textView5"
                 android:height="@dimen/abc_action_bar_content_inset_material"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginBottom="5dp" />
+                android:layout_marginLeft="20sp"
+                android:layout_marginRight="20sp"
+                android:layout_marginBottom="5sp" />
         </LinearLayout>
 
 
@@ -202,9 +202,9 @@
                 android:id="@+id/textView6"
                 android:height="@dimen/abc_action_bar_content_inset_material"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginBottom="5dp" />
+                android:layout_marginLeft="20sp"
+                android:layout_marginRight="20sp"
+                android:layout_marginBottom="5sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -224,8 +224,8 @@
             android:id="@+id/linearLayout13">
 
             <EditText
-                android:layout_width="201dp"
-                android:layout_height="35dp"
+                android:layout_width="201sp"
+                android:layout_height="35sp"
                 android:id="@+id/editText6"
                 android:inputType="textEmailAddress"
                 android:textStyle="normal"
